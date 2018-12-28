@@ -19,7 +19,7 @@ exports.testWait1 = testWait1;
 
 function testWait2(count, objEmail) {
     return new Promise(async (resolved, rejected) => {
-        setTimeout(function () {
+        await setTimeout(function () {
             logger("No. " + count, objEmail);
             resolved("Success " + count);
         }, 2000);
