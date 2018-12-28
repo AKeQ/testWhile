@@ -24,30 +24,30 @@ async.whilst(function () {
 	async.parallel([
 		function (parallelBack) {
 			// Wait for 1.2 sec
-			logger("starting loop:", loop_count);
+			logger("starting loop:" + loop_count);
 			setTimeout(function () {
 				parallelBack();
 			}, time_single_loop);
 		},
 		function (parallelBack) {
 			// Process Queue
-			logger("process queue:", loop_count);
+			logger("process queue:" + loop_count);
 
 			//parallelBack();
 			processQueue(15, (arrayEmail) => {
 				logger("arrayEmail : " + arrayEmail.length);
 				// callback
-				async.eachOfLimit(arrayEmail, 15,
-					(objEmail, key, eachBack) => {
-						test.testWait1(loop_count, objEmail, (result) => {
-							logger(result);
-						});
-						eachBack();
-					});
+				// async.eachOfLimit(arrayEmail, 15,
+				// 	(objEmail, key, eachBack) => {
+				// 		test.testWait1(loop_count, objEmail, (result) => {
+				// 			logger(result);
+				// 		});
+				// 		eachBack();
+				// 	});
+				// parallelBack();
 				// async/awiat
-				/*
 				async.eachOfLimit(arrayEmail, 15,
-					(objEmail, key) => {
+					async (objEmail, key) => {
 						try {
 							let result = await test.testWait2(loop_count, objEmail);
 							logger(result);
@@ -55,12 +55,11 @@ async.whilst(function () {
 							logger.error(error);
 						}
 					});
-					*/
 				parallelBack();
 			});
 		}
 	], function (err, results) {
-		logger("---finished loop:", loop_count + "---");
+		logger("---finished loop:" + loop_count + "---");
 		loop_count++;
 		whilstBack();
 	});

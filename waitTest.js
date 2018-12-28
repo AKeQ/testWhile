@@ -7,12 +7,12 @@ function logger(message) {
 }
 
 function testWait1(count, objEmail, callback) {
-    
+
     setTimeout(function () {
         logger("No. " + count, objEmail);
         callback("Success " + count);
-    }, 2);
-    
+    }, 2000);
+
 }
 
 exports.testWait1 = testWait1;
@@ -22,8 +22,10 @@ function testWait2(count, objEmail) {
         setTimeout(function () {
             logger("No. " + count, objEmail);
             resolved("Success " + count);
-        }, 2);
+        }, 2000);
     });
 }
 
 exports.testWait2 = testWait2;
+
+
